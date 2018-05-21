@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Server",
+            "type": "node",
+            "request": "launch",
+            "preLaunchTask": "npm-build",
+            "program": "${workspaceRoot}/src/app.ts",
+            "outFiles": [ "${workspaceRoot}/dist/**/*.js" ],
+            "envFile": "${workspaceRoot}/dev.env",
+            "console": "integratedTerminal"
+        }
+    ]
+}

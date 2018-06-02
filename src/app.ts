@@ -11,6 +11,9 @@ import pingRouter from "./routes/ping-router";
 import { setVualtoTransactionId } from "./utils/logging/vualto-transaction-id";
 import { LogLevel, VualtoTransactionId } from "./utils/logging/constants";
 import { expressLoggingLogger } from "./utils/logging/logger";
+import { initControllers } from "./controllers/controller-initializer";
+
+
 
 class App {
 	public express: express.Application;
@@ -32,13 +35,14 @@ class App {
 
 	private _middleware(): void {
 		this.express.use(setVualtoTransactionId);
-		this.express.use(expressLogging(expressLoggingLogger, {policy: 'params'}));
+		this.express.use(expressLogging(expressLoggingLogger, {policy: "params"}));
 		this.express.use(bodyParser.json());
 		this.express.use(bodyParser.urlencoded({ extended: false }));
 	}
 
 	private _routes(): void {	
 		this.express.use("/ping", pingRouter);
+		initControllers(this.express);
 	}
 
 	private _configureLogging(): void {

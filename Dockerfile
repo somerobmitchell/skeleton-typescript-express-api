@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:8
+FROM node:8.11.2-alpine
 LABEL maintainer="Robert Mitchell <robert.mitchell@vualto.com>"
 
 RUN mkdir /app
@@ -7,11 +7,11 @@ WORKDIR /app
 COPY package.json tsconfig.json /app/
 COPY src /app/src
 
-RUN npm install -g typescript@2.8.1 && \
-    npm install && \
-    tsc && \
+RUN npm install -g nodemon \
+    npm install --production && \
+    npm run build:release && \
     rm -rf src
 
 EXPOSE 9292
 
-CMD node dist/app.js
+CMD nodemon dist/app.js

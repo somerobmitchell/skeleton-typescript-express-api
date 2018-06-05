@@ -11,6 +11,7 @@ import pingRouter from "./routes/ping-router";
 import { setVualtoTransactionId } from "./utils/logging/vualto-transaction-id";
 import { LogLevel, VualtoTransactionId } from "./utils/logging/constants";
 import { expressLoggingLogger } from "./utils/logging/logger";
+import { notFoundHandler, errorHandler } from "./utils/error/errorHandler";
 
 class App {
 	public express: express.Application;
@@ -28,6 +29,7 @@ class App {
 
 		this._middleware();
 		this._routes();
+		this._errorHandlers();
 	}
 
 	private _middleware(): void {
@@ -39,6 +41,11 @@ class App {
 
 	private _routes(): void {	
 		this.express.use("/ping", pingRouter);
+	}
+
+	private _errorHandlers(): void {
+		this.express.use(notFoundHandler);
+		this.express.use(errorHandler);
 	}
 
 	private _configureLogging(): void {

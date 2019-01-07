@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "build": "npm run test && tsc",
+    "build:release": "tsc",
     "test": "mocha --reporter spec --exit --compilers ts:ts-node/register \"test/**/*.test.ts\""
   },
   "repository": {
@@ -36,14 +37,15 @@
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "mocha": "^5.2.0",
-    "ts-node": "^6.0.3",
-    "typescript": "^2.8.3"
+    "ts-node": "^6.0.3"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
     "continuation-local-storage": "^3.2.1",
     "express": "^4.16.3",
     "express-logging": "^1.1.1",
+    "nodemon": "^1.17.5",
+    "typescript": "^2.8.3",
     "uuid": "^3.2.1",
     "winston": "^2.4.2",
     "winston-loggly-bulk": "^2.0.2"
